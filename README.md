@@ -50,3 +50,5 @@ For the testbench, every possible combination of inputs was used to test the out
 When first creating the behavioral section I forgot to declare AB, BC, and AC signals which made the code not function. this problem could also have been aleviated by useing parenthasis when defining outputs ```VHDL Cout = (A and B) or (B and C) or (A and C) ```
 
 When creating the Testbench the test inputs were defined wrong, rather than using "Cin", "C" was used.
+
+Compenent's names cannot start with numbers
