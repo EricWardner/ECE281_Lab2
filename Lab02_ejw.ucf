@@ -1,0 +1,17 @@
+#====== INPUTS =======
+NET "A[3]" LOC = "R17";
+NET "A[2]" LOC = "N17";
+NET "A[1]" LOC = "L13";
+NET "A[0]" LOC = "L14";
+NET "B[3]" LOC = "K17";
+NET "B[2]" LOC = "K18";
+NET "B[1]" LOC = "H18";
+NET "B[0]" LOC = "G18";
+NET "SubSwitch" LOC = "H13";
+
+#======OUTPUTS======
+NET "Sum[3]" LOC = "K14";
+NET "Sum[2]" LOC = "K15";
+NET "Sum[1]" LOC = "J15";
+NET "Sum[0]" LOC = "J14";
+NET "Overflow" LOC = "R4";

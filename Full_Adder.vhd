@@ -1,18 +1,18 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
+-- Company: Department of Electrical and Computer Engineering USAF Academy
+-- Engineer: C3C Eric J. Wardner
 -- 
 -- Create Date:    22:52:00 02/09/2014 
--- Design Name: 
--- Module Name:    Full_Adder - Behavioral 
--- Project Name: 
--- Target Devices: 
+-- Design Name: 	 4 Bit Full Adder with Carry
+-- Module Name:    Full_Adder - Structural
+-- Project Name: 	Lab 2
+-- Target Devices: Spartan 3 FPGA
 -- Tool versions: 
--- Description: 
+-- Description: Will implement a 4 bit adder with carry and overflow
 --
 -- Dependencies: 
 --
--- Revision: 
+-- Revision: 1.1
 -- Revision 0.01 - File Created
 -- Additional Comments: 
 --
@@ -30,25 +30,58 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity Full_Adder is
-    Port ( A : in  STD_LOGIC;
-           B : in  STD_LOGIC;
-           Cin : in  STD_LOGIC;
-           Sum : out  STD_LOGIC;
-           Cout : out  STD_LOGIC);
+    Port ( A : in  STD_LOGIC_VECTOR (3 downto 0);
+           B : in  STD_LOGIC_VECTOR (3 downto 0);
+           SubSwitch : in  STD_LOGIC;
+           Sum : out  STD_LOGIC_VECTOR (3 downto 0);
+           Overflow : out  STD_LOGIC);
 end Full_Adder;
 
-architecture Behavioral of Full_Adder is
+architecture Structural of Full_Adder is
 
-signal BC, AB, AC : STD_Logic;
+COMPONENT Single_Bit_Adder
+	Port ( A : in  STD_LOGIC;
+          B : in  STD_LOGIC;
+          Cin : in  STD_LOGIC;
+          Sum : out  STD_LOGIC;
+          Cout : out  STD_LOGIC);
+	END COMPONENT;
+	
+signal Cout0, Cout1, Cout2 : STD_LOGIC;
 
 begin
-BC <= B and Cin;
-AB <= A and B;
-AC <= A and Cin;
 
-Sum <= A xor B xor Cin;
-Cout <= BC or AB or AC;
+	ZeroBit: Single_Bit_Adder PORT MAP(
+		A => A(0),
+		B => B(0),
+		Cin => SubSwitch,
+		Sum => Sum(0),
+		Cout => Cout0
+	);
+	
+	OneBit: Single_Bit_Adder PORT MAP(
+		A => A(1),
+		B => B(1),
+		Cin => Cout0,
+		Sum => Sum(1),
+		Cout => Cout1
+	);
+	
+	TwoBit: Single_Bit_Adder PORT MAP(
+		A => A(2),
+		B => B(2),
+		Cin => Cout1,
+		Sum => Sum(2),
+		Cout => Cout2
+	);
 
+	ThreeBit: Single_Bit_Adder PORT MAP(
+		A => A(3),
+		B => B(3),
+		Cin => Cout2,
+		Sum => Sum(3),
+		Cout => Overflow
+	);
 
-end Behavioral;
+end Structural;
 
