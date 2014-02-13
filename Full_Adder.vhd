@@ -1,6 +1,5 @@
 ----------------------------------------------------------------------------------
 -- Company: Department of Electrical and Computer Engineering USAF Academy
-<<<<<<< HEAD
 -- Engineer: C3C Eric J. Wardner
 -- 
 -- Create Date:    22:52:00 02/09/2014 
@@ -14,21 +13,6 @@
 -- Dependencies: 
 --
 -- Revision: 1.1
-=======
--- Engineer: C3C Eric J Wardner
--- 
--- Create Date:    22:52:00 02/09/2014 
--- Design Name:     Lab2 Prelab
--- Module Name:    Full_Adder - Behavioral 
--- Project Name:    Lab 2
--- Target Devices: Sparten FPGA
--- Tool versions: 
--- Description:  Full Adder with carry output
---
--- Dependencies: 
---
--- Revision: 1
->>>>>>> a9eb51300cd895727686b561993b97106de2b254
 -- Revision 0.01 - File Created
 -- Additional Comments: 
 --
@@ -63,13 +47,26 @@ COMPONENT Single_Bit_Adder
           Cout : out  STD_LOGIC);
 	END COMPONENT;
 	
+COMPONENT subMux
+	Port ( Input : in  STD_LOGIC_VECTOR(3 downto 0);
+			 Subber : in  STD_LOGIC;
+			 O : out  STD_LOGIC_VECTOR(3 downto 0));
+END COMPONENT;
+
 signal Cout0, Cout1, Cout2 : STD_LOGIC;
+signal Bmuxed : STD_LOGIC_VECTOR(3 downto 0);
 
 begin
 
+	BsubMux: subMux PORT MAP(
+		Input => B,
+		Subber => SubSwitch,
+		O => Bmuxed
+	);
+
 	ZeroBit: Single_Bit_Adder PORT MAP(
 		A => A(0),
-		B => B(0),
+		B => Bmuxed(0),
 		Cin => SubSwitch,
 		Sum => Sum(0),
 		Cout => Cout0
@@ -77,7 +74,7 @@ begin
 	
 	OneBit: Single_Bit_Adder PORT MAP(
 		A => A(1),
-		B => B(1),
+		B => Bmuxed(1),
 		Cin => Cout0,
 		Sum => Sum(1),
 		Cout => Cout1
@@ -85,7 +82,7 @@ begin
 	
 	TwoBit: Single_Bit_Adder PORT MAP(
 		A => A(2),
-		B => B(2),
+		B => Bmuxed(2),
 		Cin => Cout1,
 		Sum => Sum(2),
 		Cout => Cout2
@@ -93,7 +90,7 @@ begin
 
 	ThreeBit: Single_Bit_Adder PORT MAP(
 		A => A(3),
-		B => B(3),
+		B => Bmuxed(3),
 		Cin => Cout2,
 		Sum => Sum(3),
 		Cout => Overflow
