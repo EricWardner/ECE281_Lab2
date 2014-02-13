@@ -1,5 +1,6 @@
 ----------------------------------------------------------------------------------
 -- Company: Department of Electrical and Computer Engineering USAF Academy
+<<<<<<< HEAD
 -- Engineer: C3C Eric J. Wardner
 -- 
 -- Create Date:    22:52:00 02/09/2014 
@@ -13,6 +14,21 @@
 -- Dependencies: 
 --
 -- Revision: 1.1
+=======
+-- Engineer: C3C Eric J Wardner
+-- 
+-- Create Date:    22:52:00 02/09/2014 
+-- Design Name:     Lab2 Prelab
+-- Module Name:    Full_Adder - Behavioral 
+-- Project Name:    Lab 2
+-- Target Devices: Sparten FPGA
+-- Tool versions: 
+-- Description:  Full Adder with carry output
+--
+-- Dependencies: 
+--
+-- Revision: 1
+>>>>>>> a9eb51300cd895727686b561993b97106de2b254
 -- Revision 0.01 - File Created
 -- Additional Comments: 
 --
