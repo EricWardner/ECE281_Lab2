@@ -54,3 +54,58 @@ When creating the Testbench the test inputs were defined wrong, rather than usin
 Compenent's names cannot start with numbers
 
 ##Lab
+
+####Design Process
+The overarching goal of the lab was to implement the single bit adder from the prelab as a 4 bit adder device that could subtract and detect overflow.
+
+The goal of implementing the single bit adder was acomplished using structural programming techniques. By making the single bit adder a component, it could be used 4 times to calculate the sum of two 4 bit binary numbers. The "Single_Bit_Adder" was created with three inputs (A, B, and Cin) and two outputs (Sum, Cout). The behavioral code for one of these single bit adder components looked as follows
+```VHDL
+architecture Behavioral of Single_Bit_Adder is
+
+begin
+
+Sum <= A xor B xor Cin;
+Cout <= (B and Cin) or (A and B) or (A and Cin);
+
+end Behavioral;
+```
+
+The next step was to chain together this Single_Bit_Adder component four times in an overall "Full_Adder" structural code. By chaining together the single bit adder components 4 times, a 4 bit addition could be calculated. The chain of components looked as follows
+![alt tag](https://raw.github.com/EricWardner/ECE281_Lab2/master/StructureCapture.PNG)
+```VHDL
+	ZeroBit: Single_Bit_Adder PORT MAP(
+		A => A(0),
+		B => B(0),
+		Cin => SubSwitch,
+		Sum => Sum(0),
+		Cout => Cout0
+	);
+	
+	OneBit: Single_Bit_Adder PORT MAP(
+		A => A(1),
+		B => B(1),
+		Cin => Cout0,
+		Sum => Sum(1),
+		Cout => Cout1
+	);
+	
+	TwoBit: Single_Bit_Adder PORT MAP(
+		A => A(2),
+		B => B(2),
+		Cin => Cout1,
+		Sum => Sum(2),
+		Cout => Cout2
+	);
+
+	ThreeBit: Single_Bit_Adder PORT MAP(
+		A => A(3),
+		B => B(3),
+		Cin => Cout2,
+		Sum => Sum(3),
+		Cout => Overflow
+	);
+```
+An Overflow was detected if there was any carry out for the most significant bit.
+
+
+
