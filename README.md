@@ -107,5 +107,11 @@ The next step was to chain together this Single_Bit_Adder component four times i
 ```
 An Overflow was detected if there was any carry out for the most significant bit.
 
+Once the syntax was ironed out, a .ucf file was created then the code was uploaded to the FPGA and tested for functionality.
+
+The test was a success. From left to right the first four switches are A, the second four switched are B. The last four lights represent the answer and the first light comes on if there is an overflow.
+
+#####Self-checking looping testbench
+The testbench was the next challenge to overcome. 
 
 
