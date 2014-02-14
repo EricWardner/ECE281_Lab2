@@ -34,7 +34,8 @@ entity Full_Adder is
            B : in  STD_LOGIC_VECTOR (3 downto 0);
            SubSwitch : in  STD_LOGIC;
            Sum : out  STD_LOGIC_VECTOR (3 downto 0);
-           Overflow : out  STD_LOGIC);
+           Cout : out  STD_LOGIC;
+			  Overflow : out  STD_LOGIC);
 end Full_Adder;
 
 architecture Structural of Full_Adder is
@@ -53,8 +54,9 @@ COMPONENT subMux
 			 O : out  STD_LOGIC_VECTOR(3 downto 0));
 END COMPONENT;
 
-signal Cout0, Cout1, Cout2 : STD_LOGIC;
-signal Bmuxed : STD_LOGIC_VECTOR(3 downto 0);
+
+signal Cout0, Cout1, Cout2, CoutOver : STD_LOGIC;
+signal Bmuxed, sumInput : STD_LOGIC_VECTOR(3 downto 0);
 
 begin
 
@@ -68,7 +70,7 @@ begin
 		A => A(0),
 		B => Bmuxed(0),
 		Cin => SubSwitch,
-		Sum => Sum(0),
+		Sum => sumInput(0),
 		Cout => Cout0
 	);
 	
@@ -76,7 +78,7 @@ begin
 		A => A(1),
 		B => Bmuxed(1),
 		Cin => Cout0,
-		Sum => Sum(1),
+		Sum => sumInput(1),
 		Cout => Cout1
 	);
 	
@@ -84,7 +86,7 @@ begin
 		A => A(2),
 		B => Bmuxed(2),
 		Cin => Cout1,
-		Sum => Sum(2),
+		Sum => sumInput(2),
 		Cout => Cout2
 	);
 
@@ -92,9 +94,12 @@ begin
 		A => A(3),
 		B => Bmuxed(3),
 		Cin => Cout2,
-		Sum => Sum(3),
-		Cout => Overflow
+		Sum => sumInput(3),
+		Cout => CoutOver
 	);
 
+Overflow <= (A(3)and B(3) and (not sumInput(3)) and (not SubSwitch)) 
+				or ((not A(3)) and (not B(3)) and sumInput(3) and (not SubSwitch));
+Sum <= sumInput;
 end Structural;
 
