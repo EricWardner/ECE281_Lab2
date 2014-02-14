@@ -109,9 +109,48 @@ An Overflow was detected if there was any carry out for the most significant bit
 
 Once the syntax was ironed out, a .ucf file was created then the code was uploaded to the FPGA and tested for functionality.
 
+[![Adder Test](http://img.youtube.com/vi/rA5CHW5-bmc/0.jpg)](http://www.youtube.com/watch?v=rA5CHW5-bmc)
+
 The test was a success. From left to right the first four switches are A, the second four switched are B. The last four lights represent the answer and the first light comes on if there is an overflow.
 
 #####Self-checking looping testbench
-The testbench was the next challenge to overcome. 
+The testbench was the next challenge to overcome. The goal was to check all 255 possible cominations of 1s and 0s by looping through and adding 1 to A or B on every loop. Ulitmately the following code prooved successfull.
+
+```VHDL
+A <= "0000";
+	  B <= "0000";
+	  SubSwitch <= '0';
+	  
+	  for i in 0 to 15 loop
+			
+			for j in 0 to 15 loop
+
+				wait for 10 ns; 
+					
+					assert(Sum = A+B) report "Expected Sum =  "& integer'image(to_integer(unsigned((A)))) & " + " & integer'image(to_integer(unsigned((B)))) & " = "& integer'image(to_integer(unsigned((A+B))))&
+					"Actual Sum: " & integer'image(to_integer(unsigned(Sum))) severity ERROR;
+					
+					assert(Sum = A*B) report "A + B = " & integer'image(to_integer(unsigned((A)))) & " + " & integer'image(to_integer(unsigned((B)))) & " = " & integer'image(to_integer(unsigned(Sum))) & " CORRECT!!" severity note;
+					
+					B <= B + "0001";
+			end loop;
+			
+			A <= A + "0001";
+		end loop;
+```
+The testbench was able to check itself using the ieee.std_logic_unsigned.ALL library. The output of the testbench looked as follows
+![alt tag](https://raw.github.com/EricWardner/ECE281_Lab2/master/Lab2tbCapture.png)
+
+#####Adding Subtraction Funcionality
+Adding the subtraction functionality prooved to be an interesting challenge. It was known that a way to subtract binary numbers is to add the two's compliment of one number to the other. This was the strategy ultimately implemented. By creating a new component (a multiplexer) the FPGA was given the ability to convert the B input to it's twos complimetn at the press of a button. By pressign the button the Cin (carry in) value became a 1, which was added to the B logic vector as "0001" after B ahd been inverted. The code for the multiplexer looked as follows:
+```VHDL
+if Subber = '0' then
+	O <= Input;
+			
+else
+	O <= not Input;
+		
+end if;
+```
 
 
