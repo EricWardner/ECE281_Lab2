@@ -153,4 +153,6 @@ else
 end if;
 ```
 
+When implemented with the rest of the components in the "Full_Adder" file, the final schematic appeared as follows
+![alt tag}(https://raw.github.com/EricWardner/ECE281_Lab2/master/finalSchematicLab2.jpg)
 
