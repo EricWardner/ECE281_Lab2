@@ -156,3 +156,15 @@ end if;
 When implemented with the rest of the components in the "Full_Adder" file, the final schematic appeared as follows
 ![alt tag](https://raw.github.com/EricWardner/ECE281_Lab2/master/finalSchematicLab2.jpg)
 
+#####Testing and Debugging
+Multiple problems occured in all levels of the design process
+
+When creating the self checking test bench it took a bit of time to realize I was not using the sessecary library to preform addition and subtraction oporations (ieee.std_logic_unsigned.ALL). This problem was solved with google.
+
+Initially the testbench did not give any output when something was correct. This was fixed by adding an assert("something untrue") statement and then the desired output.
+
+Syntax was always an issue, I found it important to always check parenthesis and semi colons. 
+
+An interesting feature was implemented with the subtraction operation. When a subtraction operation yields a positive number, the same light the overflow indicator is on will turn on. If the subtraction operation yields a negative number, it will turn off. 
+
+Ultimately both the addition and subtraction tests were sucessfull. The self checking testbench appeared to work in testing all values. 
