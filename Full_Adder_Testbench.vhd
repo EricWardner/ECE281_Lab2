@@ -51,10 +51,10 @@
 
 				wait for 10 ns; 
 					
-					assert(Sum = A+B) report "Expected Sum: " & integer'image(to_integer(unsigned((A+B))))&
+					assert(Sum = A+B) report "Expected Sum =  "& integer'image(to_integer(unsigned((A)))) & " + " & integer'image(to_integer(unsigned((B)))) & " = "& integer'image(to_integer(unsigned((A+B))))&
 					"Actual Sum: " & integer'image(to_integer(unsigned(Sum))) severity ERROR;
 					
-					assert(Sum = A*B) report "A + B = " & integer'image(to_integer(unsigned(Sum))) & " CORRECT!!" severity note;
+					assert(Sum = A*B) report "A + B = " & integer'image(to_integer(unsigned((A)))) & " + " & integer'image(to_integer(unsigned((B)))) & " = " & integer'image(to_integer(unsigned(Sum))) & " CORRECT!!" severity note;
 					
 					B <= B + "0001";
 			end loop;
