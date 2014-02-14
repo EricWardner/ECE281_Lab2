@@ -168,3 +168,9 @@ Syntax was always an issue, I found it important to always check parenthesis and
 An interesting feature was implemented with the subtraction operation. When a subtraction operation yields a positive number, the same light the overflow indicator is on will turn on. If the subtraction operation yields a negative number, it will turn off. 
 
 Ultimately both the addition and subtraction tests were sucessfull. The self checking testbench appeared to work in testing all values. 
+
+#####Documentation
+http://www.seas.upenn.edu/~ese171/vhdl/VHDLTestbench.pdf - referenced for help with the looping testbench
+http://www.cs.uregina.ca/Links/class-info/301/multiplexer/lecture.html - referenced for multiplexer implementation
+C3C Taylor Boden explained why a mux was nessecary for implementation of the subtractor
+C3C Tyler Spence helped with syntax issues 
