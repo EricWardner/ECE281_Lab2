@@ -105,7 +105,11 @@ The next step was to chain together this Single_Bit_Adder component four times i
 		Cout => Overflow
 	);
 ```
-An Overflow was detected if there was any carry out for the most significant bit.
+An Overflow was attempted to be implemented with a statement that gave overflow if the addition of 2 positive numbers yielded a negative or the addition of 2 negative numbers yeilded a positive. This implementation was unsucessfull in detecting an overflow of two big numbers such as 8 and 8.
+```VHDL
+Overflow <= (A(3)and B(3) and (not sumInput(3)) and (not SubSwitch)) 
+				or ((not A(3)) and (not B(3)) and sumInput(3) and (not SubSwitch));
+```
 
 Once the syntax was ironed out, a .ucf file was created then the code was uploaded to the FPGA and tested for functionality.
 
