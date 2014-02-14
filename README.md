@@ -138,7 +138,8 @@ A <= "0000";
 			A <= A + "0001";
 		end loop;
 ```
-The testbench was able to check itself using the ieee.std_logic_unsigned.ALL library.
+The testbench was able to check itself using the ieee.std_logic_unsigned.ALL library. The output of the testbench looked as follows
+![alt tag](https://raw.github.com/EricWardner/ECE281_Lab2/master/Lab2tbCapture.png)
 
 #####Adding Subtraction Funcionality
 Adding the subtraction functionality prooved to be an interesting challenge. It was known that a way to subtract binary numbers is to add the two's compliment of one number to the other. This was the strategy ultimately implemented. By creating a new component (a multiplexer) the FPGA was given the ability to convert the B input to it's twos complimetn at the press of a button. By pressign the button the Cin (carry in) value became a 1, which was added to the B logic vector as "0001" after B ahd been inverted. The code for the multiplexer looked as follows:
