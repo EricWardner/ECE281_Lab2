@@ -3,7 +3,7 @@ ECE281_Lab2
 
 Lab2
 
-###PreLab
+##PreLab
 
 #####Truth Table
 
@@ -52,3 +52,5 @@ When first creating the behavioral section I forgot to declare AB, BC, and AC si
 When creating the Testbench the test inputs were defined wrong, rather than using "Cin", "C" was used.
 
 Compenent's names cannot start with numbers
+
+##Lab
