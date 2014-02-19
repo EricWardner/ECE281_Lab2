@@ -173,6 +173,8 @@ An interesting feature was implemented with the subtraction operation. When a su
 
 Ultimately both the addition and subtraction tests were sucessfull. The self checking testbench appeared to work in testing all values. 
 
+The overflow did not work completely it only detected overflow when the addition of two negative numbers yielded a positive
+
 #####Documentation
 http://www.seas.upenn.edu/~ese171/vhdl/VHDLTestbench.pdf - referenced for help with the looping testbench
 http://www.cs.uregina.ca/Links/class-info/301/multiplexer/lecture.html - referenced for multiplexer implementation
